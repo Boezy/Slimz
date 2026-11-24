@@ -1,0 +1,21 @@
+[build]
+  publish = "."
+[functions]
+  directory = "netlify/functions"
+[[redirects]]
+  from = "/product/*"
+  to = "/.netlify/functions/seo?sku=:splat"
+  status = 200
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/.netlify/functions/seo?sitemap=1"
+  status = 200
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
